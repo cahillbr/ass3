@@ -6,7 +6,7 @@
 # Description:
 
 
-from SLNode import *
+from SLNode import SLNode
 
 
 class SLLException(Exception):
@@ -69,12 +69,8 @@ class LinkedList:
 
     def insert_front(self, value: object) -> None:
         """
-        TODO: Write this implementation
+        Add a new node with the given value at the beginning of the list
         """
-        p_node = SLNode(value)
-        p_node.nxt = self._head.nxt
-        self._head.nxt = p_node
-        return
 
 
 
@@ -82,14 +78,7 @@ class LinkedList:
         """
         TODO: Write this implementation
         """
-        newinput = SLNode(value)
-        newinput.nxt = self.tail
 
-        x = self._head
-        while x.nxt != self.tail:
-            x = x.nxt
-        x.nxt = newinput
-        return
 
 
 
@@ -97,16 +86,7 @@ class LinkedList:
         """
         TODO: Write this implementation
         """
-        if index < 0:
-            raise SLLException
-        new_node = SLNode(value)
-        node = self._head
-        for i in range(index):
-            if node.nxt is None and i + 1 < index:
-                raise SLLException
-            node = node.nxt
-        new_node.nxt = node.nxt
-        node.nxt = new_node
+
 
 
 
@@ -114,83 +94,33 @@ class LinkedList:
         """
         TODO: Write this implementation
         """
-        # in the scenario that index < 0 or List is empty then raise Exception
-        if index < 0 or self._head.nxt == self.tail:
-            raise SLLException
-        current = self._head.nxt
-        previous = self._head
-
-        counter = 0
-        # iterate counter times
-        while counter < index and current.nxt != self.tail:
-            counter += 1
-            previous = current
-            current = current.nxt
-
-        # check counter is equal to index or out of range
-        if counter != index:
-            raise SLLException
-
-        previous.nxt = current.nxt
-        return
 
 
     def remove(self, value: object) -> bool:
         """
         TODO: Write this implementation
         """
-        curr = self._head.nxt  #
-        prev = self._head
-        while curr:
-            if curr.value == value:
-                prev.nxt = curr.nxt
-                # self._size -= 1
-                return True
-            prev = curr
-            curr = curr.nxt
-        return False
 
 
     def count(self, value: object) -> int:
         """
         TODO: Write this implementation
         """
-        count = 0  # returns the quanttiy of overlapping substring
-        node = self._head.nxt
-        while node:
-            if node.value == value:
-                count += 1
-            node = node.nxt
-        return count
+
 
 
     def find(self, value: object) -> bool:
         """
         TODO: Write this implementation
         """
-        node = self._head.nxt  # returns quantity lowest index in position of substring and alternatively returns value -1
-        while node:
-            if node.value == value:
-                return True
-            node = node.nxt
-        return False
+
 
 
     def slice(self, start_index: int, size: int) -> "LinkedList":
         """
         TODO: Write this implementation
         """
-        index = 0  # returns slice of string of argument from start to end, returns new string without modifying original
-        new_lst = LinkedList()
-        node = self._head.nxt
-        while node and index < start_index:
-            node = node.nxt
-            index += 1
-        while node and size > 0:
-            new_lst.insert_back(node.value)
-            node = node.nxt
-            size -= 1
-        return new_lst
+
 
 
 
