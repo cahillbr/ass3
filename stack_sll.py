@@ -63,29 +63,27 @@ class Stack:
 
     def push(self, value: object) -> None:
         """
-        TODO: Write this implementation
+        Add a new element to the top of the stack
         """
-        new_node = SLNode(value)
-        new_node.nxt = self._head
+        new_node = SLNode(value, self._head)
         self._head = new_node
 
     def pop(self) -> object:
         """
-        TODO: Write this implementation
+        Remove and return the top element of the stack
         """
         if self.is_empty():
-            raise StackException
-        esteem = self._head.value
-        self._head = self._head.nxt
-        return esteem
-
+            raise StackException("The stack is empty")
+        value = self._head.value
+        self._head = self._head.next
+        return value
 
     def top(self) -> object:
         """
-        TODO: Write this implementation
+        Return the value of the top element of the stack without removing it
         """
         if self.is_empty():
-            raise StackException
+            raise StackException("The stack is empty")
         return self._head.value
 
 

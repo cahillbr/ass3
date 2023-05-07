@@ -69,58 +69,127 @@ class LinkedList:
 
     def insert_front(self, value: object) -> None:
         """
-        Add a new node with the given value at the beginning of the list
+        Insert a new node at the beginning of the list.
         """
-
-
+        new_node = SLNode(value)
+        new_node.next = self._head.next
+        self._head.next = new_node
 
     def insert_back(self, value: object) -> None:
         """
-        TODO: Write this implementation
+        Insert a new node at the end of the list.
         """
-
-
-
+        new_node = SLNode(value)
+        current_node = self._head
+        while current_node.next:
+            current_node = current_node.next
+        current_node.next = new_node
 
     def insert_at_index(self, index: int, value: object) -> None:
         """
-        TODO: Write this implementation
+        Insert a new node with a specified value at the given index.
         """
+        if index < 0:
+            raise SLLException("Invalid index")
 
+        new_node = SLNode(value)
+        current_node = self._head
+        count = 0
 
+        while current_node.next and count < index:
+            current_node = current_node.next
+            count += 1
 
+        if count == index:
+            new_node.next = current_node.next
+            current_node.next = new_node
+        else:
+            raise SLLException("Invalid index")
 
     def remove_at_index(self, index: int) -> None:
         """
-        TODO: Write this implementation
+        Remove the node at the specified index.
         """
+        if index < 0:
+            raise SLLException("Invalid index")
 
+        current_node = self._head
+        count = 0
+
+        while current_node.next and count < index:
+            current_node = current_node.next
+            count += 1
+
+        if current_node.next:
+            current_node.next = current_node.next.next
+        else:
+            raise SLLException("Invalid index")
 
     def remove(self, value: object) -> bool:
         """
-        TODO: Write this implementation
+        Remove the first occurrence of the specified value from the list.
         """
+        current_node = self._head
 
+        while current_node.next:
+            if current_node.next.value == value:
+                current_node.next = current_node.next.next
+                return True
+            current_node = current_node.next
+
+        return False
 
     def count(self, value: object) -> int:
         """
-        TODO: Write this implementation
+        Count the number of occurrences of the specified value in the list.
         """
+        count = 0
+        current_node = self._head.next
 
+        while current_node:
+            if current_node.value == value:
+                count += 1
+            current_node = current_node.next
 
+        return count
 
     def find(self, value: object) -> bool:
         """
-        TODO: Write this implementation
+        Check if the specified value is present in the list.
         """
+        current_node = self._head.next
 
+        while current_node:
+            if current_node.value == value:
+                return True
+            current_node = current_node.next
 
+        return False
 
     def slice(self, start_index: int, size: int) -> "LinkedList":
         """
-        TODO: Write this implementation
+        Return a new linked list containing a slice of the original list.
         """
+        if start_index < 0 or size < 0:
+            raise SLLException("Invalid start index or size")
 
+        current_node = self._head.next
+        count = 0
+
+        while current_node and count < start_index:
+            current_node = current_node.next
+            count += 1
+
+        if not current_node:
+            raise SLLException("Invalid start index")
+
+        sliced_list = LinkedList()
+        while current_node and size > 0:
+            sliced_list.insert_back(current_node.value)
+            current_node = current_node.next
+            size -= 1
+
+        return sliced_list
 
 
 

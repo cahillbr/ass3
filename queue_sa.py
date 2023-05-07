@@ -65,65 +65,41 @@ class Queue:
         return index
 
     # ---------------------------------------------------------------------- #
-
     def enqueue(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
         if self._current_size == self._sa.length():
             self._double_queue()
+
         self._back = self._increment(self._back)
         self._sa[self._back] = value
         self._current_size += 1
 
-
     def dequeue(self) -> object:
-        """
-        TODO: Write this implementation
-        """
         if self.is_empty():
-            raise QueueException
-        result = self._sa[self._front]
+            raise QueueException("Queue is empty")
+
+        value = self._sa[self._front]
         self._front = self._increment(self._front)
         self._current_size -= 1
-        return result
-
+        return value
 
     def front(self) -> object:
-        """
-        TODO: Write this implementation
-        """
         if self.is_empty():
-            raise QueueException
+            raise QueueException("Queue is empty")
+
         return self._sa[self._front]
 
-
     # The method below is optional, but recommended, to implement. #
     # You may alter it in any way you see fit.                     #
 
     def _double_queue(self) -> None:
-        """
-        TODO: Write this implementation
-        """
-        new_sa = StaticArray(2 * self._sa.length())
-        front_index = self._front
+        new_sa = StaticArray(self._sa.length() * 2)
         for i in range(self._current_size):
-            new_sa[i] = self._sa[front_index]
-            front_index = self._increment(front_index)
-        self._sa = new_sa
+            new_sa[i] = self._sa[self._front]
+            self._front = self._increment(self._front)
+
         self._front = 0
         self._back = self._current_size - 1
-
-
-
-    # The method below is optional, but recommended, to implement. #
-    # You may alter it in any way you see fit.                     #
-
-    def _double_queue(self) -> None:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        self._sa = new_sa
 
 
 # ------------------- BASIC TESTING -----------------------------------------

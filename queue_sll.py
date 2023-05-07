@@ -63,60 +63,27 @@ class Queue:
     # -----------------------------------------------------------------------
 
     def enqueue(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
-        # Create a new node
-        node = SLNode(value)
-
-        # Check if the queue is empty
+        new_node = SLNode(value)
         if self.is_empty():
-            # Set head and tail to new node
-            self._head = node
-            self._tail = node
-
-        # Otherwise, add new node to the end of the queue
+            self._head = new_node
+            self._tail = new_node
         else:
-            self._tail.nxt = node
-            # Update tail to new node
-            self._tail = node
-
+            self._tail.next = new_node
+            self._tail = new_node
 
     def dequeue(self) -> object:
-        """
-        TODO: Write this implementation
-        """
-        # Check if the queue is empty
         if self.is_empty():
-            raise QueueException
-
-        # Store the value of the head node
+            raise QueueException("Cannot dequeue from an empty queue")
         value = self._head.value
-
-        # Check if there is only one node in the queue
-        if self._head == self._tail:
-            # Set head and tail to None
-            self._head = None
+        self._head = self._head.next
+        if self.is_empty():
             self._tail = None
-
-        # Otherwise, move head to the next node
-        else:
-            self._head = self._head.nxt
-
-        # Return the dequeued value
         return value
 
-
     def front(self) -> object:
-        """
-        TODO: Write this implementation
-        """
         if self.is_empty():
-            raise QueueException
-
-        # Return the value of the head node
+            raise QueueException("Cannot retrieve front from an empty queue")
         return self._head.value
-
 
 
 # ------------------- BASIC TESTING -----------------------------------------

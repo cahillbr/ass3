@@ -52,21 +52,25 @@ class Stack:
 
     def push(self, value: object) -> None:
         """
-        TODO: Write this implementation
+        Add a new value to the stack
         """
-        pass
+        self._da.append(value)
 
     def pop(self) -> object:
         """
-        TODO: Write this implementation
+        Remove and return the top element from the stack
         """
-        pass
+        if self.is_empty():
+            raise StackException("Stack is empty")
+        return self._da.pop()
 
     def top(self) -> object:
         """
-        TODO: Write this implementation
+        Return the top element of the stack without removing it
         """
-        pass
+        if self.is_empty():
+            raise StackException("Stack is empty")
+        return self._da.get_at_index(self._da.length() - 1)
 
 
 # ------------------- BASIC TESTING -----------------------------------------
