@@ -21,7 +21,7 @@ class DynamicArray:
         self._capacity = 4
         self._data = StaticArray(self._capacity)
 
-        # populate dynamic array with initial values (if provided)
+        # ppopulate dynamic array with initial values (if provided)
         # before using this feature, implement append() method
         if start_array is not None:
             for value in start_array:
