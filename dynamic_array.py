@@ -1,4 +1,9 @@
-
+# Name:Brendan Cahill
+# OSU Email:cahillbr@oregonstate.edu
+# Course: CS261 - Data Structures
+# Assignment:3
+# Due Date:5/8/23
+# Description: Linked List and ADT Implementation
 
 from static_array import StaticArray
 
