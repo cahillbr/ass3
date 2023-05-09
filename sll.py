@@ -6,7 +6,7 @@
 # Description:
 
 
-from SLNode import SLNode
+from SLNode import *
 
 
 class SLLException(Exception):
@@ -184,6 +184,11 @@ class LinkedList:
             raise SLLException("Invalid start index")
 
         sliced_list = LinkedList()
+        remaining_size = self.length() - count
+
+        if size > remaining_size:
+            raise SLLException("Invalid size")
+
         while current_node and size > 0:
             sliced_list.insert_back(current_node.value)
             current_node = current_node.next
@@ -192,85 +197,10 @@ class LinkedList:
         return sliced_list
 
 
-
 if __name__ == "__main__":
-
-    print("\n# insert_front example 1")
-    test_case = ["A", "B", "C"]
-    lst = LinkedList()
-    for case in test_case:
-        lst.insert_front(case)
-        print(lst)
-
-    print("\n# insert_back example 1")
-    test_case = ["C", "B", "A"]
-    lst = LinkedList()
-    for case in test_case:
-        lst.insert_back(case)
-        print(lst)
-
-    print("\n# insert_at_index example 1")
-    lst = LinkedList()
-    test_cases = [(0, "A"), (0, "B"), (1, "C"), (3, "D"), (-1, "E"), (5, "F")]
-    for index, value in test_cases:
-        print("Inserted", value, "at index", index, ": ", end="")
-        try:
-            lst.insert_at_index(index, value)
-            print(lst)
-        except Exception as e:
-            print(type(e))
-
-    print("\n# remove_at_index example 1")
-    lst = LinkedList([1, 2, 3, 4, 5, 6])
-    print(f"Initial LinkedList : {lst}")
-    for index in [0, 2, 0, 2, 2, -2]:
-        print("Removed at index", index, ": ", end="")
-        try:
-            lst.remove_at_index(index)
-            print(lst)
-        except Exception as e:
-            print(type(e))
-
-    print("\n# remove example 1")
-    lst = LinkedList([1, 2, 3, 1, 2, 3, 1, 2, 3])
-    print(f"Initial LinkedList, Length: {lst.length()}\n  {lst}")
-    for value in [7, 3, 3, 3, 3]:
-        print(f"remove({value}): {lst.remove(value)}, Length: {lst.length()}"
-              f"\n {lst}")
-
-    print("\n# remove example 2")
-    lst = LinkedList([1, 2, 3, 1, 2, 3, 1, 2, 3])
-    print(f"Initial LinkedList, Length: {lst.length()}\n  {lst}")
-    for value in [1, 2, 3, 1, 2, 3, 3, 2, 1]:
-        print(f"remove({value}): {lst.remove(value)}, Length: {lst.length()}"
-              f"\n {lst}")
-
-    print("\n# count example 1")
-    lst = LinkedList([1, 2, 3, 1, 2, 2])
-    print(lst, lst.count(1), lst.count(2), lst.count(3), lst.count(4))
-
-    print("\n# find example 1")
-    lst = LinkedList(["Waldo", "Clark Kent", "Homer", "Santa Claus"])
-    print(lst)
-    print(lst.find("Waldo"))
-    print(lst.find("Superman"))
-    print(lst.find("Santa Claus"))
-
-    print("\n# slice example 1")
     lst = LinkedList([1, 2, 3, 4, 5, 6, 7, 8, 9])
     ll_slice = lst.slice(1, 3)
     print("Source:", lst)
     print("Start: 1 Size: 3 :", ll_slice)
     ll_slice.remove_at_index(0)
     print("Removed at index 0 :", ll_slice)
-
-    print("\n# slice example 2")
-    lst = LinkedList([10, 11, 12, 13, 14, 15, 16])
-    print("Source:", lst)
-    slices = [(0, 7), (-1, 7), (0, 8), (2, 3), (5, 0), (5, 3), (6, 1)]
-    for index, size in slices:
-        print("Start:", index, "Size:", size, end="")
-        try:
-            print(" :", lst.slice(index, size))
-        except:
-            print(" : exception occurred.")
